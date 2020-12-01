@@ -50,4 +50,20 @@
   (first-part input)
   ; Answer - 193171814
   (second-part input)
+
+  ; Alternative (simple and slick) implementation based of Lambda Island
+  ; First part
+  (set
+    (for [x input
+          y input
+          :when (= 2020 (+ x y))]
+      (* x y)))
+
+  ; Second part
+  (set
+    (for [x input
+          y input
+          z input
+          :when (= 2020 (+ x y z))]
+      (* x y z)))
 )
