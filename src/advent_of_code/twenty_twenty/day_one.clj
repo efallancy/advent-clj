@@ -17,7 +17,7 @@
        (when (< i ttl)
          (let [x (nth xs i)
                pair (- amount x)
-               set-list (set (rest xs))]
+               set-list (set xs)]
            (if (contains? set-list pair)
              [x pair]
              (recur (inc i)))))))))
