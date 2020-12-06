@@ -1,4 +1,4 @@
-(ns advent-of-code.twenty-twenty.day-one
+(ns advent-of-code.twenty-twenty.day-four
   (:require [clojure.string :refer [split-lines includes?]]
             [clojure.java.io :refer [resource]]))
 
