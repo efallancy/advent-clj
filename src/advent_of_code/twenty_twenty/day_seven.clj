@@ -4,6 +4,9 @@
 
 (def input (split-lines (slurp (resource "day_seven_input.txt"))))
 
+(defn parseInt [x]
+  (try (Integer/parseInt x) (catch Exception _ 0)))
+
 (defn potential-bags [colour]
   (reduce
     (fn [x y]
@@ -18,10 +21,21 @@
   (if (zero? (count xs))
     (set ys)
     (let [xys (mapcat concat (map potential-bags xs))]
-      (bags xys (concat ys xys))))
-)
+      (bags xys (concat ys xys)))))
+
+(defn max-bags [bag]
+  (let [input (filter #(= bag (second (re-find #"(\w*\s\w*) bags?" %))) input)
+        parsed (first (map #(rest (re-seq #"(\d*?)\s?(\w*\s\w*) bags?" %)) input))
+        colours (mapcat (fn [[_ ttl colour]] (repeat (parseInt ttl) colour)) parsed)]
+    (if (not= (count colours) 0)
+      (apply concat colours (map max-bags colours))
+      colours)))
 
 (comment
   ; First part - 213
-  (count (bags ["shiny gold"] [])))
+  (count (bags ["shiny gold"] []))
+  
+  ; Second part - 38426
+  (count (max-bags "shiny gold"))
+)
 
